@@ -1,0 +1,35 @@
+<div class="container">
+  <div  [ngClass]="{'swap':shouldWrap}" class="product-grid" >
+    <div class="product-item" *ngFor="let product of productList" (click)="detailproduct(product.idproduct,product.nameproduct)">
+      <div class="discount-tag" *ngIf="product.deprice > 0">
+        - {{ product.deprice }} %
+      </div>
+      <div class="product-image">
+        <img
+          [src]="product.image[0].image4 || 'assets/images/default.jpg'"
+          alt="Sản phẩm 1"
+        />
+      </div>
+      <h3
+        class="product-name"
+        [ngbTooltip]="product.nameproduct"
+        placement="top"
+      >
+        {{ product.nameproduct | slice : 0 : 29
+        }}<span *ngIf="product.nameproduct.length > 29">..</span>
+      </h3>
+
+      <div class="product-price">
+        Giá: {{ product.price | number : "1.0-0" }} đ
+      </div>
+      <div class="rating">
+        <mat-icon *ngFor="let star of fullStars">star</mat-icon>
+        <mat-icon *ngIf="hasHalfStar">star_half</mat-icon>
+        <mat-icon *ngFor="let star of emptyStars">star_border</mat-icon>
+        <span class="rating-value">{{ rating }}</span>
+      </div>
+    </div>
+    <!-- Thêm các sản phẩm khác tương tự ở đây -->
+  </div>
+
+</div>

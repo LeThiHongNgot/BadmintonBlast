@@ -1,0 +1,51 @@
+
+<app-heaher></app-heaher>
+<div class="container-home">
+  <div class="container-banner">
+    <div id="slideshow">
+      <div class="slide-wrapper">
+        <div class="slide">
+          <img src="/assets/images/banner1.webp" alt="Banner 2" />
+        </div>
+        <div class="slide">
+          <img src="/assets/images/banner2.webp" alt="Banner 3" />
+        </div>
+        <div class="slide">
+          <img src="/assets/images/Badminton.png" alt="Banner 1" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bar-kindproduct">
+    <div class="bar-header">
+      <div class="margin-bar">
+      <h2>SẢN PHẨM BẠN MUỐN TÌM</h2>
+      <div class="navigation">
+        <div class="arrow2" (click)="scrollSlider(-1)"></div>
+        <div class="arrow" (click)="scrollSlider(1)"></div>
+      </div>
+      </div>
+    </div>
+    <div class="slider">
+      <div class="slider-item" *ngFor="let kind of  kindproductMenu">
+        <img [src]="kind.image" alt="Bóng bàn" />
+        <p>{{ kind.nameproduct }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="container-product">
+    <div class="bar-header">
+      <div class="margin-bar">
+        <h2>SẢN PHẨM</h2>
+        <div class="menu-kind">
+          <div class="parallelogram" *ngFor="let kind of kindproduct">
+            <span class="text">{{ kind.nameproduct }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-productlist [productList]="productsracker"></app-productlist>
+    <button class="load-more">Xem thêm</button>
+  </div>
+</div>
+<app-footer></app-footer>

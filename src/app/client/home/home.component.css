@@ -1,0 +1,387 @@
+.container-home {
+  padding-top: 92px; /* Khoảng cách cho cả header và menu */
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Ẩn các phần thừa */
+  align-items: center;
+}
+
+.container-banner {
+  position: relative;
+  width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
+  height: 400px; /* Chiều cao banner */
+  overflow: hidden;
+  /* Ẩn nội dung tràn ra ngoài */
+}
+.container-banner::after {
+  content: ""; /* Cần thiết để hiển thị pseudo-element */
+  position: absolute;
+  font-size: 50px;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(
+    250,
+    250,
+    250,
+    0
+  ); /* Màu overlay (đen với độ trong suốt 50%) */
+  pointer-events: none; /* Đảm bảo không ảnh hưởng đến sự kiện chuột */
+}
+#slideshow {
+  overflow: hidden;
+  width: 100%; /* Chiếm toàn bộ chiều rộng container */
+  height: 100%; /* Giữ chiều cao bằng với container */
+}
+
+.slide-wrapper {
+  display: flex; /* Sử dụng flexbox để căn chỉnh slide */
+  width: 100%; /* Đảm bảo chiều rộng là 100% */
+  height: 400px; /* Căn chỉnh chiều cao */
+  animation: slide 14s ease infinite;
+}
+
+.slide {
+  flex: 0 0 100%; /* Chiếm 100% chiều rộng của container */
+  height: 100%; /* Chiếm toàn bộ chiều cao của container */
+}
+
+.slide img {
+  width: 100%; /* Hình ảnh chiếm toàn bộ chiều ngang */
+  height: 100%; /* Hình ảnh chiếm toàn bộ chiều dọc */
+  object-fit: cover; /* Đảm bảo hình ảnh không bị méo, cắt để phù hợp container */
+}
+
+@keyframes slide {
+  20% {
+    margin-left: 0;
+  }
+  30% {
+    margin-left: -100%;
+  }
+  50% {
+    margin-left: -100%;
+  }
+  60% {
+    margin-left: -200%;
+  }
+  80% {
+    margin-left: -200%;
+  }
+}
+.container-product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.bar-kindproduct {
+  width: 100%;
+  z-index: 2;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bar-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.margin-bar {
+  padding: 0 30px 0 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+h2 {
+  font-size: 15px;
+  margin-left: 50px;
+  position: relative;
+}
+h2::after {
+  margin-left: 0px;
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #325dac;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+.slider {
+  padding: 0 0 60px 60px;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+.slider ::after{
+  top: 0;
+  left:0;
+  background-color: #0bb032;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+.slider::-webkit-scrollbar {
+  height: 1px;
+  background-color: #ffffff;
+}
+.slider::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+.slider-item {
+  position: relative; /* Để chữ có thể nằm tuyệt đối bên trong */
+  width: 200px;
+  height: 160px;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow: hidden; /* Đảm bảo phần nội dung không tràn ra ngoài */
+}
+
+.slider-item img {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.slider-item p {
+  position: absolute;
+  bottom: 10px; /* Vị trí chữ nằm ở phía dưới của hình ảnh */
+  left: 50%;
+  transform: translateX(-50%); /* Căn giữa chữ theo chiều ngang */
+  font-size: 14px;
+  color: white; /* Chữ trắng để nổi bật trên hình ảnh */
+  background-color: rgba(0, 0, 0, 0.6); /* Nền mờ đen để dễ đọc chữ */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.slider-item:hover p {
+  background-color: rgba(0, 0, 0, 0.9); /* Tăng độ đậm của nền chữ */
+  padding: 8px 12px; /* Tăng khoảng cách padding */
+  bottom: 15px; /* Di chuyển chữ lên cao hơn một chút */
+}
+
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.arrow {
+  width: 50px;
+  height: 20px;
+  background: linear-gradient(
+        -135deg,
+        transparent 22px,
+        #838389 22px,
+        #6574ff 100%
+      )
+      top right,
+    linear-gradient(-45deg, transparent 22px, #0429fb 22px, #6c6584 100%) bottom
+      right;
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển tiếp cho transform */
+}
+
+.arrow2 {
+  width: 50px;
+  height: 20px;
+  margin-right: 5px;
+  background: linear-gradient(
+        135deg,
+        transparent 22px,
+        #6280d2 22px,
+        #eceeed 100%
+      )
+      top left,
+    linear-gradient(45deg, transparent 22px, #4a7df4 22px, #2f00a6 100%) bottom
+      left;
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển tiếp cho transform */
+}
+
+.arrow:hover {
+  transform: translateY(-2px) scale(1); /* Hiệu ứng nhấp nhô */
+}
+
+.arrow2:hover {
+  transform: translateY(-2px) scale(1); /* Hiệu ứng nhấp nhô */
+}
+
+.parallelogram {
+  height: 20px;
+  margin-left: 10px;
+  display: flex; /* Sử dụng flexbox */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  padding: 5px;
+  background-color: #5020cb; /* Màu nền */
+  color: white; /* Màu chữ */
+  font-size: 12px; /* Kích thước chữ */
+  text-align: center; /* Căn giữa chữ */
+}
+.menu-kind {
+  display: flex;
+  flex-direction: row;
+}
+.load-more {
+  width: 100px;
+  padding: 5px;
+  margin-top: 20px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.load-more:hover {
+  background-color: #3a7bd5;
+}
+@media (max-width: 768px) {
+  .container-banner {
+    width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
+    height: 150px; /* Chiều cao banner */
+  }
+  .container-product {
+    padding: 0;
+    width: 100%;
+  }
+  .slide-wrapper {
+    display: flex; /* Sử dụng flexbox để căn chỉnh slide */
+    width: 100%; /* Đảm bảo chiều rộng là 100% */
+    height: 150px;
+    animation: slide 14s ease infinite;
+  }
+
+  .bar-kindproduct {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .bar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h2 {
+    font-size: 20px;
+    margin-left: 50px;
+    position: relative;
+  }
+  h2::after {
+    margin-left: 0px;
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #325dac;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+  }
+  h2 {
+    padding: 0;
+    font-size: 15px;
+    position: relative;
+  }
+}
+@media (min-width: 468px) {
+  .container-product {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .bar-kindproduct {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .bar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h2 {
+    font-size: 20px;
+    margin-left: 0;
+    position: relative;
+  }
+}
+@media (max-width: 1204px) {
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 sản phẩm trên hàng */
+  }
+  .container-product {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .bar-kindproduct {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .bar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h2 {
+    font-size: 20px;
+    margin-left: 0px;
+    position: relative;
+  }
+}
+@media (max-width: 412px) {
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 sản phẩm trên hàng */
+  }
+  .container-product {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .bar-kindproduct {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .bar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h2 {
+    font-size: 15px;
+    margin-left: 0px;
+    position: relative;
+  }
+}

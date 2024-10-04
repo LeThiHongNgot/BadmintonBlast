@@ -1,0 +1,23 @@
+<ng-container *ngIf="timeSlots">
+    <div class="table-container">
+      <table class="table-auto w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="fixed-header border px-4 py-2" rowspan="2">Sân</th>
+            <th *ngFor="let slot of timeSlots" class="border px-4 py-2 custom-time-slot">{{ slot }}</th> <!-- Header for each time slot -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let field of fields">
+            <td class="border px-4 py-2 fixed-column">{{ field }}</td> <!-- Fixed field name -->
+            <td *ngFor="let status of mockSchedule[field]; let i = index" 
+                [ngClass]="getStatusClass(status)" 
+                class="border px-4 py-2">
+              <!-- Optionally, you can put status or icons here -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  

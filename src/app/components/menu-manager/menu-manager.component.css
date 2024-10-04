@@ -1,0 +1,70 @@
+.container {
+  width: 100%;
+  min-height: 100vh; /* Sử dụng chiều cao tối thiểu là 100% viewport */
+  display: flex;
+  flex-direction: row; /* Đặt các phần tử con nằm theo hàng ngang */
+  background-color: #f0f5ff; /* Màu nền */
+}
+/* Sidebar Style */
+.sidebar {
+  width: 8%;
+  display: flex;
+  position: fixed; /* Fixed position to stay in place when scrolling */
+  top: 0;
+  left: 0;
+  flex-direction: column; /* Đặt chiều dọc cho các phần tử */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  height: 100%; /* Full height */
+  background-color: white; /* Light grey background */
+  box-shadow: 2px 0 5px rgba(244, 243, 243, 0.1); /* Shadow for better separation */
+}
+.sidebar-header {
+  margin-top: 0;
+  margin-bottom: 80%;
+}
+
+.sidebar-item {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+}
+
+.sidebar-item:hover {
+  background-color: #ddd; /* Light grey on hover */
+}
+.frame-icon {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(59, 51, 51, 0.74);
+  margin-bottom: 20px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Độ sáng cho khung */
+  transition: background-color 0.3s, color 0.3s; /* Thêm hiệu ứng chuyển tiếp */
+  cursor: pointer; /* Thêm thuộc tính này để đổi con trỏ chuột */
+}
+
+.frame-icon:active {
+  background-color: #272848; /* Màu nền khi nhấp */
+  border-color: #272848; /* Đổi màu border khi nhấp */
+  color: #272848; /* Đổi màu icon khi nhấp */
+  box-shadow: 0 0 15px #272848; /* Độ sáng cho khung khi nhấp */
+}
+
+.frame-icon span {
+  font-size: 40px;
+  color: rgba(45, 40, 40, 0.772);
+  transition: color 0.3s; /* Thêm hiệu ứng chuyển tiếp */
+  transition: background-color 0.3s, color 0.3s; /* Thêm hiệu ứng chuyển tiếp */
+}
+
+.frame-icon:active span {
+  background-color: rgb(243, 240, 248); /* Màu nền khi nhấp */
+  border-color: rgb(239, 237, 241); /* Đổi màu border khi nhấp */
+  color: rgb(250, 248, 253); /* Đổi màu icon khi nhấp */
+  box-shadow: 0 0 15px rgb(252, 251, 253); /* Độ sáng cho khung khi nhấp */
+}

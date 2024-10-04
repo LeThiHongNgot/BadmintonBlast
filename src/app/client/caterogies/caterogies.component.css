@@ -1,0 +1,103 @@
+.breadcrumb {
+  background-color: #f5f5f5; /* Màu nền của breadcrumb */
+  padding: 20px 25px; /* Đệm cho breadcrumb */
+  font-size: 14px; /* Kích thước chữ */
+}
+
+.breadcrumb ul {
+  list-style: none; /* Bỏ gạch chân cho danh sách */
+  display: flex; /* Sử dụng flexbox để căn giữa */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  margin: 0; /* Xóa margin */
+  padding: 0; /* Xóa padding */
+}
+
+.breadcrumb li {
+  margin: 0 5px; /* Khoảng cách giữa các mục */
+}
+
+.breadcrumb a {
+  text-decoration: none; /* Bỏ gạch chân */
+  color: #333; /* Màu chữ */
+}
+
+.breadcrumb span {
+  color: #aaa; /* Màu cho dấu phân cách */
+}
+.container {
+  display: flex; /* Sử dụng flexbox để tạo bố cục 3 cột */
+  border-top: 1px solid #767373;
+  margin-bottom: 20px;
+}
+
+.sidebar {
+  width: 200px; /* Chiều rộng của sidebar */
+  background-color: #f5f5f5; /* Màu nền của sidebar */
+  padding: 15px; /* Đệm cho sidebar */
+  border-right: 1px solid #b2abab;
+}
+
+.content {
+  flex: 1; /* Chiếm không gian còn lại */
+
+  justify-content: center;
+}
+.content .list-product {
+  margin-top: 20px;
+  width: 100%;
+  display: flex; 
+  justify-content: center;
+}
+
+.book-item {
+  border: 1px solid #ddd; /* Đường viền cho mỗi sách */
+  border-radius: 5px; /* Bo góc */
+  padding: 10px; /* Đệm cho mỗi sách */
+  margin-bottom: 20px; /* Khoảng cách giữa các mục sách */
+  text-align: center; /* Căn giữa văn bản */
+}
+.product-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 10px 20px;
+}
+
+.product-nav ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product-nav li {
+  margin-right: 20px;
+}
+
+.product-nav a {
+  text-decoration: none;
+  color: #333;
+}
+
+.product-nav .active a {
+  font-weight: bold;
+}
+
+.product-nav .icon {
+  color: orange;
+}
+
+.product-nav .sale {
+  color: red;
+}
+
+.view-options {
+  display: flex;
+  align-items: center;
+}
+
+.view-options button,
+.view-options select {
+  margin-left: 10px;
+}

@@ -1,0 +1,121 @@
+/* Tùy chỉnh bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif; /* Định dạng font chữ */
+  }
+  
+  /* Định dạng tiêu đề bảng (Thời gian) */
+  thead th {
+    background-color: #4CAF50; /* Màu nền cho tiêu đề */
+    color: white; /* Màu chữ cho tiêu đề */
+    padding: 5px; /* Đệm */
+    font-size: 10px; /* Kích thước chữ */
+    text-align: center; /* Căn giữa */
+    border: 1px solid #ddd; /* Viền */
+  }
+  
+  .time
+  {
+    display: flex;
+    flex-direction: row;   
+    width: 100px;
+    height:30px;
+    border: 1px solid #120d0d;
+  }
+
+  /* Định dạng hàng sân */
+  tbody td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 10px; /* Kích thước chữ */
+  }
+  
+  /* Định dạng tên sân (cột đầu tiên) */
+  tbody td:first-child {
+    background-color: #f2f2f2; /* Màu nền cho cột tên sân */
+    font-weight: bold; /* Chữ đậm */
+    font-size: 8px; /* Kích thước chữ */
+  }
+  
+  /* Màu nền cho các ô trạng thái */
+  .bg-red-500 {
+    background-color: #f56565; /* Màu đỏ */
+    color: white; /* Màu chữ */
+    font-size: 14px; /* Kích thước chữ trong ô trạng thái */
+  }
+  
+  .bg-gray-400 {
+    background-color: #cbd5e0; /* Màu xám */
+    color: black; /* Màu chữ */
+    font-size: 14px; /* Kích thước chữ trong ô trạng thái */
+  }
+  
+  .bg-white {
+    background-color: #2d2d2d; /* Màu trắng */
+    color: black; /* Màu chữ */
+    font-size: 14px; /* Kích thước chữ trong ô trạng thái */
+  }
+  
+  /* Định dạng khi hover chuột vào các ô */
+  tbody td:hover {
+    background-color: #f1f1f1; /* Màu nền khi hover */
+    cursor: pointer;
+  }
+  
+  /* Tùy chỉnh kích thước bảng tổng thể */
+  table {
+    max-width: 1200px;
+    margin: 20px auto; /* Căn giữa bảng */
+  }
+  .time-detail
+  {
+    width: 30px;
+    height:30px;
+    border: 1px solid #120d0d;
+    font-size: 14px; /* Kích thước chữ */
+    text-align: center; /* Căn giữa */
+    margin-bottom: 10px; /* Khoảng cách giữa các �� */
+  }
+  .table-container {
+    position: relative; /* Required for absolute positioning of the fixed column */
+    overflow-x: auto; /* Enable horizontal scrolling */
+  }
+  
+  .table-auto {
+    border-collapse: collapse; /* Ensure borders are collapsed */
+    width: 100%; /* Full width of the container */
+  }
+  
+  .fixed-header {
+    width: 20px !important;
+    position: sticky; /* Make header sticky */
+    top: 0; /* Stick to the top of the table */
+    background-color: white; /* Background color for visibility */
+    z-index: 1; /* Ensure it is above other content */
+  }
+  
+  .fixed-column {
+    position: sticky; /* Make the field name sticky */
+    left: 0; /* Stick to the left */
+    background-color: white; /* Background color for visibility */
+    z-index: 2; /* Ensure it is above other content */
+  }
+  
+  .fixed-header {
+    position: sticky; /* Make header sticky */
+    top: 0; /* Stick to the top of the table */
+    background-color: white; /* Background color for visibility */
+    z-index: 1; /* Ensure it is above other content */
+    font-size: 10px; /* Change font size for the fixed header */
+    padding: 5px; /* Adjust padding for the fixed header */
+    height: 20px; /* Set height for the fixed header */
+  }
+  
+  .table-auto th {
+    font-size: 10px; /* Change font size for the other headers */
+    padding: 5px; /* Adjust padding for other headers */
+    height: 25px; /* Set height for other headers */
+  }
+  

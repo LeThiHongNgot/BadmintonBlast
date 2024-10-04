@@ -1,0 +1,44 @@
+<app-heaher></app-heaher>
+<nav class="breadcrumb">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><span>/</span></li>
+    <li><a href="#">Non-fiction</a></li>
+    <li><span>/</span></li>
+    <li><a href="#">Self-development</a></li>
+  </ul>
+</nav>
+<div class="container">
+  <div class="sidebar left">
+    <h3>Nhãn hàng</h3>
+    <label><input type="checkbox" checked> Book (10,448)</label><br>
+   
+  </div>
+
+  <div class="content">
+    <nav class="product-nav">
+      <ul>
+        <!-- <li><a href="#">Giá giảm dần</a></li>
+        <li><a href="#">Giá tăng dần</a></li>
+        <li><a href="#">Mới nhất</a></li>
+        <li><a href="#">Cũ nhất</a></li> -->
+      </ul>
+      <div class="view-options"> 
+        <select>
+          <option>Sort by: Recommended</option>
+        </select>
+      </div>
+    </nav>
+
+    <div class="list-product">
+      <app-productlist [productList]="products" [shouldWrap]="shouldWrap"></app-productlist>
+    </div>
+
+    <app-paging
+      [totalPages]="Math.ceil(total / pageSize)"
+      [currentPage]="pageIndex"
+      (pageChanged)="onPageChanged($event)"
+    ></app-paging>
+  </div>
+</div>
+<app-footer></app-footer>

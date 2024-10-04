@@ -1,0 +1,95 @@
+<app-heaher></app-heaher>
+<div class="container-productdetail">
+<nav class="breadcrumb">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><span>/</span></li>
+    <li><a href="#">Non-fiction</a></li>
+    <li><span>/</span></li>
+    <li><a href="#">Self-development</a></li>
+  </ul>
+</nav>
+<div class="container" *ngIf="product">
+  <div class="image-gallery">
+    <img [src]="selectedImage" alt="Product Main Image" class="main-image" />
+    <div class="thumbnail-container">
+      <div
+        class="slider-item"
+        *ngFor="let image of product.image"
+        [ngClass]="{ active: isImage(image.image4) }"
+        (click)="selectImage(image.image4)"
+      >
+        <img [src]="image.image4" alt="Image 1" />
+      </div>
+    </div>
+  </div>
+  <div class="product-info">
+    <h1 class="product-title">
+      {{ product.nameproduct }}
+    </h1>
+    <div class="product-rating">★★★★☆ 4.5 (154 orders) In stock</div>
+    <div class="product-price">{{ product.price | number : "1.0-0" }}đ</div>
+    <div class="product-description">
+      <p [innerHTML]="formatDescription(product.description)"></p>
+      <button (click)="toggleDescription()">
+        {{ showFullDescription ? "Xem ít" : "Xem thêm" }}
+      </button>
+    </div>
+    <div class="size-options">
+      <label>Màu - Kích thước: </label>
+      <!-- Lặp qua danh sách productstocks -->
+      <button
+        *ngFor="let productStock of product.productstocks"
+        class="size-button"
+        [ngClass]="{ active: isSelected(productStock) }"
+        (click)="selectProductStock(productStock)"
+      >
+        {{ productStock.namecolor }} - {{ productStock.namesize }}
+      </button>
+    </div>
+    <div class="quantity-selector">
+      <label>Quantity: </label>
+      <div class="quality-input">
+        <button>-</button>
+        <input type="text" value="14" min="1" />
+        <button>+</button>
+      </div>
+    </div>
+    <button class="add-to-cart">THÊM VÀO GIỎ HÀNG</button>
+    <button class="save-button">MUA NGAY</button>
+    <button class="social-share">CHIA SẺ</button>
+  </div>
+  <div class="guarantee">
+    <button>Cam kết chính hãng 100%</button>
+  </div>
+</div>
+<div class="container-all-product">
+<div class="product-same-kind">
+  <div class="product-list-header">SẢN PHẨM LIÊN QUAN</div>
+  <app-productlist
+    [productList]="productsKind"
+    [shouldWrap]="shouldWrap"
+  ></app-productlist>
+  <app-paging
+  [totalPages]="Math.ceil(total / pageSize)"
+  [currentPage]="pageIndex"
+  (pageChanged)="onPageChanged($event)"
+></app-paging>
+</div>
+<div class="product-list">
+  <div class="product-list-header">CÓ THỂ BẠN THÍCH</div>
+  <div class="product-item">
+    <img src="assets/images/Racker.jpg" alt="Sandals" class="product-image">
+    <div class="product-details">
+      <div class="product-name">Sandals leo núi đá ngoại nam NH100</div>
+      <div class="product-price">
+        545.000đ
+        <span class="original-price">800.000đ</span>
+      </div>
+    </div>
+  </div>
+  <!-- Repeat the product-item div for each product -->
+</div>
+</div>
+</div>
+<app-footer></app-footer>

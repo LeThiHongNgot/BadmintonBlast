@@ -1,0 +1,33 @@
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3 class="sidebar-header">
+      <img src="assets/images/logo.png" alt="" />
+    </h3>
+
+    <div class="frame-icon" [ngStyle]="getIconStyle(0)" (click)="selectIcon(0)">
+      <span class="material-symbols-outlined" [ngStyle]="getIcon(0)"
+        >attach_money</span
+      >
+    </div>
+
+    <div class="frame-icon" [ngStyle]="getIconStyle(1)" (click)="selectIcon(1)">
+      <span class="material-symbols-outlined" [ngStyle]="getIcon(1)"
+        >inventory</span
+      >
+    </div>
+
+    <div class="frame-icon" [ngStyle]="getIconStyle(2)" (click)="selectIcon(2)">
+      <span class="material-symbols-outlined" [ngStyle]="getIcon(2)"
+        >orders</span
+      >
+    </div>
+
+    <div class="frame-icon" [ngStyle]="getIconStyle(3)" (click)="selectIcon(3)">
+      <span class="material-symbols-outlined" [ngStyle]="getIcon(3)"
+        >person</span
+      >
+    </div>
+  </div>
+  <app-header-manager [selectedIndex]="selectedIndex"></app-header-manager>
+</div>
