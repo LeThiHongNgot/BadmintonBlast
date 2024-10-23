@@ -4,7 +4,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { HeaderManagerComponent } from '../header-manager/header-manager.component';
 import { MatIconModule } from '@angular/material/icon';
 import { NgStyle } from '@angular/common';
-
+import {MatButtonModule} from '@angular/material/button';
+import { ManagerCustomerComponent } from '../../admin/managerCustomer/manager-customer.component';
+import { TableComponent } from '../../table/table.component';
+import { ManagerProductComponent } from "../../admin/manager-product/manager-product.component";
+import { AddProductComponent } from "../../admin/add-product/add-product.component";
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { OrderComponent } from "../../admin/order/order.component";
 @Component({
   selector: 'app-menu-manager',
   standalone: true,
@@ -14,48 +21,30 @@ import { NgStyle } from '@angular/common';
     HeaderManagerComponent,
     MatIconModule,
     NgStyle,
-  ],
+    MatButtonModule,
+    MatButtonModule,
+    ManagerCustomerComponent,
+    TableComponent,
+    ManagerProductComponent,
+    AddProductComponent,
+    OrderComponent
+],
   templateUrl: './menu-manager.component.html',
   styleUrl: './menu-manager.component.css',
 })
 export class MenuManagerComponent {
-  @Output() iconSelected = new EventEmitter<number>(); // Sự kiện phát ra chỉ số biểu tượng được chọn
-  selectedIndex: number = 1; // Biến theo dõi biểu tượn
-
-  selectIcon(index: number): void {
-    this.selectedIndex = index; // Cập nhật chỉ số biểu tượng khi nhấp
+  manager: string = ''; // Biến theo dõi loại trang
+  constructor(private route: ActivatedRoute, private router: Router) {}
+  ngOnInit(): void {
+    // Lấy chỉ số từ URL và cập nhật biến manager
+    this.route.params.subscribe(params => {
+      this.manager = params['index'];
+    });
   }
 
-  getIconStyle(index: number) {
-    // Kiểm tra nếu biểu tượng có chỉ số đang được chọn
-    if (this.selectedIndex === index) {
-      return {
-        'background-color': ' #272848', // Màu nền khi chọn
-        'border-color': ' #272848', // Màu viền khi chọn
-        color: '#272848', // Màu trắng cho icon khi chọn
-        'box-shadow': '0 0 15px  #272848', // Độ sáng cho khung khi chọn
-      };
-    } else {
-      // Trạng thái mặc định khi không được chọn
-      return {
-        'background-color': '',
-        'border-color': '',
-        color: '', // Trả về màu mặc định
-        'box-shadow': '',
-      };
-    }
+  selectIcon(index: string): void {
+    this.router.navigate(['menu', index]); 
+    this.manager=index;
   }
-  getIcon(index: number) {
-    // Kiểm tra nếu biểu tượng có chỉ số đang được chọn
-    if (this.selectedIndex === index) {
-      return {
-        color: 'rgb(250, 248, 253)', // Màu trắng cho icon khi chọn
-      };
-    } else {
-      // Trạng thái mặc định khi không được chọn
-      return {
-        color: '', // Trả về màu mặc định
-      };
-    }
-  }
+
 }

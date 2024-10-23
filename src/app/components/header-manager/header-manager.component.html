@@ -1,13 +1,19 @@
-<div class="header-right">
-  <div class="frame-icon">
-   <img src="assets/images/ngotle.jpg">
+<header class="header">
+  <div class="search-container">
+    <span class="material-symbols-outlined">
+      search
+      </span>
+    <input type="text" class="search-input" placeholder="Tìm kiếm ..." />
   </div>
-  <div class="frame-icon">
-    <span class="material-symbols-outlined"> notifications </span>
+  <div class="icon-container">
+    <span class="material-symbols-outlined icon">
+      notifications_active</span
+    >
+    <img
+      src="/api/placeholder/32/32"
+      alt="Profile picture"
+      class="profile-picture"
+    />
+    <span class="greeting">Hi, Hizrian</span>
   </div>
-</div>
-<div>
-  <<app-manager-customer *ngIf="selectedIndex==3" class="body-manager"></app-manager-customer> 
-  <app-manager-product *ngIf="selectedIndex==1" class="body-manager"></app-manager-product>
-  <app-order *ngIf="selectedIndex==2" class="body-manager"></app-order>
-</div>
+</header>

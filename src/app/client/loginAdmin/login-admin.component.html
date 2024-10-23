@@ -1,0 +1,85 @@
+<div class="modal-overlay" *ngIf="loginstatus">
+  <div class="container" *ngIf="showRegister">
+    <div>
+      <span
+        class="material-symbols-outlined"
+        style="cursor: pointer"
+        (click)="closeForm()"
+      >
+        close
+      </span>
+    </div>
+    <h2>ĐĂNG KÝ</h2>
+    <p (click)="showRegisterForm()" stype="cursor:poiner">
+      Đã có tài khoản, đăng nhập tại đây
+    </p>
+    <input
+      type="text"
+      [(ngModel)]="customer.namecustomer"
+      placeholder="Tên"
+      required
+    />
+    <div class="horizontal-layout">
+      <input
+        type="email"
+        [(ngModel)]="customer.email"
+        name="email"
+        [disabled]="isemail"
+        placeholder="Email"
+        required
+      />
+      <button (click)="checkEmail(customer.email)">Gửi</button>
+    </div>
+    <input
+    type="text"
+    [(ngModel)]="otp"
+    (ngModelChange)="onOTPChange($event)"
+    maxlength="6"
+    placeholder="Nhập mã OTP"
+    required
+  />
+
+    <input
+      type="password"
+      [(ngModel)]="customer.passwordHash"
+      placeholder="Mật khẩu"
+      required
+      [disabled]="isDisabled"
+      [ngClass]="{'unlocked': changeColor, 'locked': !changeColor}"
+    />
+    <button type="submit" (click)="register()">Đăng ký</button>
+    <div class="social-login">
+      <p>Hoặc đăng nhập bằng</p>
+      <div class="social-buttons">
+        <button class="social-btn facebook">Facebook</button>
+        <button class="social-btn google">Google</button>
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngIf="showlogin">
+    <div>
+      <span
+        class="material-symbols-outlined"
+        style="cursor: pointer"
+        (click)="closeForm()"
+      >
+        close
+      </span>
+    </div>
+    <h2>ĐĂNG NHẬP</h2>
+    <p>
+      Chưa có tài khoản? <a (click)="showRegisterForm()">Đăng ký tại đây</a>
+    </p>
+      <input type="email" [(ngModel)]="login.email" placeholder="Email" required />
+      <input type="password" [(ngModel)]="login.password" placeholder="Mật khẩu" required  />
+      <button (click)="submitlogin(login.email,login.password)">Đăng nhập</button>
+    <div class="social-login">
+      <p>Hoặc đăng nhập bằng</p>
+      <div class="social-buttons">
+        <button class="social-btn facebook">Facebook</button>
+        <button class="social-btn google">Google</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-notification *ngIf="hidenotify"  [message]="message"></app-notification>

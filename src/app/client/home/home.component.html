@@ -1,51 +1,46 @@
-
 <app-heaher></app-heaher>
-<div class="container-home">
-  <div class="container-banner">
-    <div id="slideshow">
-      <div class="slide-wrapper">
-        <div class="slide">
-          <img src="/assets/images/banner1.webp" alt="Banner 2" />
+<div class="swap">
+  <div class="container" (mouseenter)="onMouseEnter()" 
+  (mouseleave)="onMouseLeave()">
+    <div class="container-banner">
+      <div class="banner">
+        <div
+          *ngFor="let slide of slides; let i = index"
+          class="banner-slide"
+          [ngStyle]="{ display: slideIndex === i + 1 ? 'block' : 'none' }"
+        >
+          <img
+            class="image-banner"
+            [src]="slide.imgUrl"
+            alt="Slide {{ i + 1 }}"
+          />
         </div>
-        <div class="slide">
-          <img src="/assets/images/banner2.webp" alt="Banner 3" />
-        </div>
-        <div class="slide">
-          <img src="/assets/images/Badminton.png" alt="Banner 1" />
-        </div>
+        <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+        <a class="next" (click)="plusSlides(1)">&#10095;</a>
+      </div>
+      <div class="last-banner">
+        <img src="/assets/banner/6.png" alt="" />
+        <img src="/assets/banner/5.png" alt="" />
       </div>
     </div>
-  </div>
-  <div class="bar-kindproduct">
-    <div class="bar-header">
-      <div class="margin-bar">
-      <h2>SẢN PHẨM BẠN MUỐN TÌM</h2>
-      <div class="navigation">
-        <div class="arrow2" (click)="scrollSlider(-1)"></div>
-        <div class="arrow" (click)="scrollSlider(1)"></div>
-      </div>
-      </div>
-    </div>
-    <div class="slider">
-      <div class="slider-item" *ngFor="let kind of  kindproductMenu">
-        <img [src]="kind.image" alt="Bóng bàn" />
-        <p>{{ kind.nameproduct }}</p>
-      </div>
-    </div>
-  </div>
-  <div class="container-product">
-    <div class="bar-header">
-      <div class="margin-bar">
-        <h2>SẢN PHẨM</h2>
-        <div class="menu-kind">
-          <div class="parallelogram" *ngFor="let kind of kindproduct">
-            <span class="text">{{ kind.nameproduct }}</span>
-          </div>
+    <div class="container-category">
+      <div class="category-item" *ngFor="let kind of kindproduct">
+        <div class="container-image" (click)="showkindproduct(kind.idkindproduct,kind.nameproduct)">
+          <img
+            [src]="kind.image"
+            alt="{{ kind.nameproduct }}"
+            class="category-icon"
+          />
         </div>
+        <span class="category-name">{{ kind.nameproduct }}</span>
       </div>
     </div>
-    <app-productlist [productList]="productsracker"></app-productlist>
-    <button class="load-more">Xem thêm</button>
   </div>
 </div>
+<app-brand></app-brand>
+<app-topsale></app-topsale>
+<app-flash-sale></app-flash-sale>
+<div class="suggest"><span>GỢI Ý</span></div>
+<app-productlist [productList]="productsracker"></app-productlist>
+<div></div>
 <app-footer></app-footer>

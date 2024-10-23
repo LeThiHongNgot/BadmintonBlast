@@ -7,4 +7,5 @@ export const environment: IEnvironment = {
     apiKey: '0d0981ba02824535a6287fba47adec46',
   },
   ssrIgnoresSsl: false,
+  
 };

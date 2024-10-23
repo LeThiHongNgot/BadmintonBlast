@@ -1,79 +1,79 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ProductService } from '../../../services/product/product.service';
 import { IProduct } from '../../../interfaces/i-Product';
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgIf, NgFor, NgClass, CommonModule } from '@angular/common';
 import { ProductlistComponent } from '../productlist/productlist.component';
 import { Ikindproduct } from '../../../interfaces/i-KindProduct';
 import { KindproductService } from '../../../services/kindproduct/kindproduct.service';
-import { HeaherComponent } from '../heaher/heaher.component';
-import { FooterComponent } from "../footer/footer.component";
-
+import { HeaherComponent } from '../../components/heaher/heaher.component';
+import { FooterComponent } from '../../components/footer/footer.component';
+import { PagingComponent } from '../../components/paging/paging.component';
+import { BrandComponent } from '../brand/brand.component';
+import { FlashSaleComponent } from "../flash-sale/flash-sale.component";
+import { TopsaleComponent } from "../topsale/topsale.component";
+import { SharedService } from '../../../services/Share.service';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgIf, NgFor, ProductlistComponent, NgClass, HeaherComponent, FooterComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  imports: [
+    CommonModule,
+    ProductlistComponent,
+    HeaherComponent,
+    PagingComponent,
+    FooterComponent,
+    BrandComponent,
+    FlashSaleComponent,
+    TopsaleComponent,
+    
+],
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  kindproductMenu = [
-    {
-      id: 1,
-      nameproduct: 'Vợt',
-      image: '/assets/images/Racker.jpg'
-    },
-    {
-      id: 2,
-      nameproduct: 'Giày',
-      image: '/assets/images/shoes.webp'
-    },
-    {
-      id: 3,
-      nameproduct: 'Balo',
-      image: '/assets/images/backpack.webp'
-    },
-    {
-      id: 4,
-      nameproduct: 'Quần',
-      image: '/assets/images/trouser.webp'
-    },
-    {
-      id: 5,
-      nameproduct: 'Áo',
-      image: '/assets/images/Clothes.jpg'
-    },
-    {
-      id: 6,
-      nameproduct: 'Cầu',
-      image: '/assets/images/ball.webp'
-    },
-  ];
   productsracker: IProduct[] = [];
   productshoes: IProduct[] = [];
   currentRacketIndex: number = 0; // Current index for racket products
   currentShoeIndex: number = 0; // Current index for shoe products
   itemsToShow: number = 12; // Number of products to show at a time
   kindproduct: Ikindproduct[] = [];
+  autoSlideInterval: any;
   constructor(
     private productService: ProductService,
-    private kindproductService: KindproductService
+    private kindproductService: KindproductService,
+    private sharedService: SharedService,
+    private router: Router,
   ) {}
   showOverlay: boolean = false;
   ngOnInit(): void {
+    this.showSlides(this.slideIndex);
     this.getKindProductService();
-    this.getAllProducts(1); // Fetch racket products for category '1'
-    this.getAllProducts(2); // Fetch shoe products for category '2'
+    this.getAllProducts(1); 
   }
-
+  onMouseEnter() {
+    this.autoSlideInterval = setInterval(() => {
+      this.plusSlides(1);
+    }, 1200); // 2000ms = 2 giây
+  }
+  
+  // Hàm xử lý khi chuột di chuyển ra khỏi hình ảnh
+  onMouseLeave() {
+    // Dừng Interval khi chuột rời đi
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
+      this.autoSlideInterval = null;
+    }
+  }
+    
   getKindProductService() {
     this.kindproductService.getKindproducts().subscribe((data) => {
       this.kindproduct = data;
     });
   }
-  // Fetch products and assign them to the respective arrays
   getAllProducts(kindproduct: number): void {
     this.productService
-      .getProductsAsync('', kindproduct, 1, 10) // Fetch a larger number of products initially
+      .getProductsAsync('', 0, 1, 18,0,0,0,0)
       .subscribe((data) => {
         if (kindproduct === 2) {
           this.productshoes = data || [];
@@ -83,11 +83,27 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  scrollSlider(direction: number): void {
-    const slider = document.querySelector('.slider') as HTMLElement | null;
-    if (slider) {
-      const scrollAmount = direction * slider.offsetWidth;
-      slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  slides = [
+    { imgUrl: 'assets/banner/7.png' },
+    { imgUrl: 'assets/banner/1.png' },
+    { imgUrl: 'assets/banner/4.png' }
+  ];
+  
+  slideIndex = 1;
+  plusSlides(n: number) {
+    this.showSlides(this.slideIndex += n);
+  }
+
+  showSlides(n: number) {
+    if (n > this.slides.length) { this.slideIndex = 1; }    
+    if (n < 1) { this.slideIndex = this.slides.length; }
+  }
+
+  showkindproduct(idkindproduct:number,name:string) 
+  {
+    if (idkindproduct) {
+      name=this.sharedService.removeDiacritics(name); 
+      this.router.navigate(['sanpham', idkindproduct, name]);
     }
   }
 }

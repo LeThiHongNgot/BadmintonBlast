@@ -1,9 +1,9 @@
 export interface IPreview
 {
- Idpreview: number;
- Idproduct: number;
- Idcustomer: number;
- Preview1: number;
+ idpreview: number;
+ idproduct: number;
+ idcustomer: number;
+ preview1: number;
  Dateprevew: Date;
  Comment: string;
 

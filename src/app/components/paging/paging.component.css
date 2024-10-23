@@ -10,17 +10,17 @@
     text-decoration: none;
     transition: background-color .3s;
     margin: 6px;
-    height: 40px;
-    font-size: 20px;
+    height: 30px;
+    font-size: 15px;
     font-weight: bold;
-    width: 40px;
+    width: 30px;
     border: 1px solid #ddd;
     background-color: white;
     cursor: pointer;
   }
   
   .pagination button.active {
-    background-color: #272848;
+    background-color: #50539a;
     color: white;
   }
   

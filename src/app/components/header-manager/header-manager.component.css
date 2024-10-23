@@ -1,72 +1,59 @@
-.header-right {
+.header {
   display: flex;
-  position: fixed;
   align-items: center;
-  top: 0;
-  right: 0;
-  width: 92%;
-  height: 100px;
-  background-color: #272848;
-  color: white;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  flex-direction: row-reverse;
+  padding: 15px 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  justify-content: space-between;
 }
-
-.frame-icon {
+.search-container {
+  display: flex;
+  align-items: center;  /* Căn giữa theo chiều dọc */
   margin-right: 20px;
-  height: 50px;
-  width: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid rgb(255, 251, 251);
-  border-radius: 10px 10px 10px 10px;
-  cursor: pointer; /* Thêm thuộc tính này để đổi con trỏ chuột */
-  overflow: hidden; /* Đảm bảo ảnh không vượt ra khỏi phần tử nếu tỉ lệ không khớp */
-}
-.frame-icon span {
-  font-size: 40px;
-  color: rgb(244, 234, 234);
+  width: 500px;
+  border: 1px solid #bdb6b6; /* Thêm border màu đen xám */
 }
 
-.frame-icon img {
-  width: 100%; /* Đặt chiều rộng ảnh theo phần tử cha */
-  height: 100%; /* Đặt chiều cao ảnh theo phần tử cha */
-  object-fit: cover; /* Đảm bảo ảnh hiển thị đầy đủ trong khung và duy trì tỉ lệ */
-  border-radius: 10px;
+.material-symbols-outlined {
+  font-size: 24px; /* Điều chỉnh kích thước biểu tượng */
+  margin-left: 10px; /* Khoảng cách giữa biểu tượng và ô tìm kiếm */
 }
-.body-manager {
-  justify-content: center;
-  right: 0;
+
+.search-input {
+  width: 90%;
+  padding: 8px 12px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+}
+
+.icon-container {
   display: flex;
-  position: fixed;
-  top: 100px;
   align-items: center;
-  width: 92%;
-  height: calc(100vh - 100px);
-  background-color: rgba(244, 244, 244, 0.998);
+}
+.icon {
+  margin-left: 15px;
+  color: #555;
+  font-size: 25px;
+}
+.notification-badge {
+  background-color: #4caf50;
   color: white;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  flex-direction: row-reverse;
-  cursor: pointer; /* Thêm thuộc tính này để đổi con trỏ chuột */
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  position: relative;
+  top: -10px;
+  left: -5px;
 }
-
-@media (max-width: 1500px) {
-  .header-right {
-    height: 60px;
-  }
-  .frame-icon span {
-    font-size: 30px;
-    color: rgb(244, 234, 234);
-  }
-  .frame-icon {
-    height: 30px;
-    width: 30px;
-  }
-  .body-manager {
-    top: 60px;
-    height: calc(100vh - 60px);
-  }
+.profile-picture {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+.greeting {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
 }

@@ -9,47 +9,74 @@
   export class ProductService {
 
     constructor(private http: HttpClient) { }
-    getProductsAsync(keyword: string | null, Idkindproduct: number | null, pageIndex: number, pageSize: number): Observable<IProduct[]> {
+    getProductsAsync(keyword: string | null, Idkindproduct: number | null, pageIndex: number, pageSize: number, discount:number|0,idbrand:number|0,minprice:number,maxPrice:number): Observable<IProduct[]> {
       let params = new HttpParams()
         .set('pageIndex', pageIndex.toString())
         .set('pageSize', pageSize.toString());
     
-      // Kiểm tra nếu có từ khóa, thì thêm vào HttpParams
       if (keyword && keyword.trim() !== '') {
         params = params.set('keyword', keyword);
       }
     
-      // Kiểm tra nếu có Idkindproduct, thì thêm vào HttpParams
       if (Idkindproduct !== null && Idkindproduct !== undefined) {
         params = params.set('Idkindproduct', Idkindproduct.toString());
       }
-    
+      if (discount !== 0) {
+        params = params.set('discount', discount .toString());
+      }
+      if(idbrand!==0)
+      {
+        params = params.set('brandId', idbrand.toString());
+      }
+      if(minprice!==0)
+      {
+        params = params.set('minprice', minprice.toString());
+      }
+      if(maxPrice!==0)
+      {
+        params = params.set('maxprice', maxPrice.toString());
+      }
+      // console.log(`${environment.apiUrl}Products/getProduct?${params.toString()}`);
+
       return this.http.get<IProduct[]>(`${environment.apiUrl}Products/getProduct`, { params });
     }
     
-    getTotalProduct(keyword: string, IdKindProduct: number): Observable<number> {
+    getTotalProduct(keyword: string, IdKindProduct: number,discount:number,idbrand:number|0,minprice:number,maxPrice:number): Observable<number> {
       let params = new HttpParams();
       
-      // Thêm tham số keyword nếu có
       if (keyword && keyword.trim() !== '') {
         params = params.set('keyword', keyword);
       }
       
-      // Thêm tham số IdKindProduct nếu khác 0
+
       if (IdKindProduct !== 0) {
         params = params.set('IdKindProduct', IdKindProduct.toString());
       }
-    
-      // In ra URL đầy đủ để kiểm tra
+
+      if (discount!== null) {
+        params = params.set('discount', discount.toString());
+      }
+      if(idbrand!==0)
+        {
+          params = params.set('brandId', idbrand.toString());
+        }
+        if(minprice!==0)
+        {
+          params = params.set('minprice', minprice.toString());
+        }
+        if(maxPrice!==0)
+        {
+          params = params.set('maxprice', maxPrice.toString());
+        }
       const fullUrl = `${environment.apiUrl}Products/GetTotalProduct?${params.toString()}`;
-      console.log('GET URL:', fullUrl);
+      // console.log('GET URL:', fullUrl);
     
       // Gọi API để lấy tổng số sản phẩm
       return this.http.get<number>(fullUrl, { params });
     }
     
     
-    getProductById(id: number): Observable<IProduct> {
+    getProductById(id: number|undefined): Observable<IProduct> {
       return this.http.get<IProduct>(`${environment.apiUrl}Products/GetById/${id}`);
     }
 

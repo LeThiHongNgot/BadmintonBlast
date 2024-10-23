@@ -1,7 +1,7 @@
 export interface IOrder {
     idorder: number;
     idbill: number;
-    idproduct: string;
+    idproduct: number;
     price: number;
     nameproduct: string;
     color: string;

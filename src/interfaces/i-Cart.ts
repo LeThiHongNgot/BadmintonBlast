@@ -1,6 +1,8 @@
 export interface ICart{
-    Idcart: number;
-    Idproduct: number;
-    Idcustomer: number;
-    Quatity: number;    
+    idcart: number;
+    idproduct: number;
+    idcustomer: number;
+    quatity: number; 
+    color:string;
+    size: string;  
 }

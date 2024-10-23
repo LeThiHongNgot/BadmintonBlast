@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { NgFor,NgIf ,NgClass} from '@angular/common';
+import { HeaherComponent } from "../../components/heaher/heaher.component";
 interface ScheduleStatus {
   [key: string]: number[];
 }
 @Component({
   selector: 'app-court',
   standalone: true,
-  imports: [NgFor,NgIf ,NgClass],
+  imports: [NgFor, NgIf, NgClass, HeaherComponent],
   templateUrl: './court.component.html',
   styleUrl: './court.component.css'
 })

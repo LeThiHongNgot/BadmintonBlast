@@ -1,13 +1,20 @@
 /* Tùy chỉnh bảng */
+.table-container
+{
+  margin-top: 100px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ cho hộp */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 table {
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif; /* Định dạng font chữ */
   }
   
-  /* Định dạng tiêu đề bảng (Thời gian) */
   thead th {
-    background-color: #4CAF50; /* Màu nền cho tiêu đề */
+    background:  #2b5dffc0; /* Tím, hồng, trắng */
     color: white; /* Màu chữ cho tiêu đề */
     padding: 5px; /* Đệm */
     font-size: 10px; /* Kích thước chữ */
@@ -39,30 +46,32 @@ table {
     font-size: 8px; /* Kích thước chữ */
   }
   
-  /* Màu nền cho các ô trạng thái */
-  .bg-red-500 {
-    background-color: #f56565; /* Màu đỏ */
-    color: white; /* Màu chữ */
-    font-size: 14px; /* Kích thước chữ trong ô trạng thái */
-  }
   
-  .bg-gray-400 {
-    background-color: #cbd5e0; /* Màu xám */
-    color: black; /* Màu chữ */
-    font-size: 14px; /* Kích thước chữ trong ô trạng thái */
-  }
-  
-  .bg-white {
-    background-color: #2d2d2d; /* Màu trắng */
-    color: black; /* Màu chữ */
-    font-size: 14px; /* Kích thước chữ trong ô trạng thái */
-  }
-  
-  /* Định dạng khi hover chuột vào các ô */
-  tbody td:hover {
-    background-color: #f1f1f1; /* Màu nền khi hover */
-    cursor: pointer;
-  }
+/* Màu nền cho các ô trạng thái */
+.bg-red-500 {
+  background-color: #ff6f61; /* Hồng */
+  color: white; /* Màu chữ */
+  font-size: 14px; /* Kích thước chữ trong ô trạng thái */
+}
+
+.bg-gray-400 {
+  background-color: #f0f4c3; /* Trắng xanh */
+  color: black; /* Màu chữ */
+  font-size: 14px; /* Kích thước chữ trong ô trạng thái */
+}
+
+.bg-white {
+  background-color: #ffffff; /* Trắng */
+  color: black; /* Màu chữ */
+  font-size: 14px; /* Kích thước chữ trong ô trạng thái */
+}
+
+/* Định dạng khi hover chuột vào các ô */
+tbody td:hover {
+  background-color: #b2ebf2; /* Màu xanh nhạt khi hover */
+  cursor: pointer;
+}
+
   
   /* Tùy chỉnh kích thước bảng tổng thể */
   table {
@@ -97,20 +106,20 @@ table {
   }
   
   .fixed-column {
-    position: sticky; /* Make the field name sticky */
-    left: 0; /* Stick to the left */
-    background-color: white; /* Background color for visibility */
-    z-index: 2; /* Ensure it is above other content */
+    position: sticky; 
+    left: 0; 
+    background-color: white; 
+    z-index: 2; 
   }
   
   .fixed-header {
-    position: sticky; /* Make header sticky */
-    top: 0; /* Stick to the top of the table */
-    background-color: white; /* Background color for visibility */
-    z-index: 1; /* Ensure it is above other content */
-    font-size: 10px; /* Change font size for the fixed header */
-    padding: 5px; /* Adjust padding for the fixed header */
-    height: 20px; /* Set height for the fixed header */
+    position: sticky;
+    top: 0; 
+    background-color: white; 
+    z-index: 1; 
+    font-size: 10px;
+    padding: 5px; 
+    height: 20px; 
   }
   
   .table-auto th {

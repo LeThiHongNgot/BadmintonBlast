@@ -1,15 +1,24 @@
-    // Customer.ts
-    export interface ICustomer {
-        idcustomer: string;
-        namecustomer:string;
-        imageCustomer: string;
-        phone: string;
-        province: string;
-        district: string;
-        village: string;
-        hamlet: string;
-        email: string;
-        passwordHash: string;
-        status:boolean;
-        role:string
-    }
+// Customer.ts
+export interface ICustomer {
+  idcustomer: number;
+  namecustomer: string;
+  imageCustomer: string;
+  phone: string;
+  province: string;
+  district: string;
+  village: string;
+  hamlet: string;
+  email: string;
+  passwordHash: string;
+  status: boolean;
+  role: string;
+}
+export interface ILogin {
+  email: string;
+  password: string;
+}
+interface ILoginResponse {
+    token: string;
+    role: string;
+    // Thêm các thuộc tính khác nếu cần
+  }

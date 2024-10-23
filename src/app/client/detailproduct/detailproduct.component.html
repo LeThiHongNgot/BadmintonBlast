@@ -1,95 +1,104 @@
 <app-heaher></app-heaher>
-<div class="container-productdetail">
-<nav class="breadcrumb">
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><span>/</span></li>
-    <li><a href="#">Non-fiction</a></li>
-    <li><span>/</span></li>
-    <li><a href="#">Self-development</a></li>
-  </ul>
-</nav>
-<div class="container" *ngIf="product">
+<div class="container" *ngIf="this.product">
   <div class="image-gallery">
-    <img [src]="selectedImage" alt="Product Main Image" class="main-image" />
+    <img [src]="product.image[0].image4" alt="Product" class="main-image" />
     <div class="thumbnail-container">
-      <div
-        class="slider-item"
+      <img
         *ngFor="let image of product.image"
-        [ngClass]="{ active: isImage(image.image4) }"
-        (click)="selectImage(image.image4)"
-      >
-        <img [src]="image.image4" alt="Image 1" />
-      </div>
+        [src]="image.image4"
+        alt="Thumbnail 1"
+        class="thumbnail"
+      />
     </div>
   </div>
   <div class="product-info">
-    <h1 class="product-title">
-      {{ product.nameproduct }}
-    </h1>
-    <div class="product-rating">★★★★☆ 4.5 (154 orders) In stock</div>
-    <div class="product-price">{{ product.price | number : "1.0-0" }}đ</div>
-    <div class="product-description">
-      <p [innerHTML]="formatDescription(product.description)"></p>
-      <button (click)="toggleDescription()">
-        {{ showFullDescription ? "Xem ít" : "Xem thêm" }}
-      </button>
-    </div>
-    <div class="size-options">
-      <label>Màu - Kích thước: </label>
-      <!-- Lặp qua danh sách productstocks -->
-      <button
-        *ngFor="let productStock of product.productstocks"
-        class="size-button"
-        [ngClass]="{ active: isSelected(productStock) }"
-        (click)="selectProductStock(productStock)"
+    <h1 class="product-title">{{ product.nameproduct }}</h1>
+    <div class="rating">
+      <span class="star">
+        <mat-icon *ngFor="let star of fullStars">star</mat-icon>
+        <mat-icon *ngIf="hasHalfStar">star_half</mat-icon>
+        <mat-icon *ngFor="let star of emptyStars">star_border</mat-icon></span
       >
-        {{ productStock.namecolor }} - {{ productStock.namesize }}
-      </button>
+      <span style="margin-right: 15px"></span>
+      <span style="margin-right: 15px">{{ this.totalpreview }} Đánh Giá</span>
+      <!-- <span>9.5k Đã Bán</span> -->
     </div>
-    <div class="quantity-selector">
-      <label>Quantity: </label>
-      <div class="quality-input">
-        <button>-</button>
-        <input type="text" value="14" min="1" />
-        <button>+</button>
+    <div class="price">
+      <span class="original-price" *ngIf="product.deprice != 0"
+        >{{ product.price | number : "1.0-0" }}đ</span
+      >
+      <span *ngIf="product.deprice == 0"
+        >{{ product.price | number : "1.0-0" }}đ</span
+      >
+      <span *ngIf="product.deprice != 0"
+        >{{
+          changediscount(product.price, product.deprice) | number : "1.0-0"
+        }}đ</span
+      >
+      <span class="discount" *ngIf="product.deprice != 0"
+        >{{ product.deprice }}% GIẢM</span
+      >
+    </div>
+    <div class="vouchers">
+      <span class="voucher">Giảm ₫10k</span>
+      <span class="voucher">Giảm ₫15k</span>
+      <span class="voucher">Giảm ₫20k</span>
+      <span class="voucher">Giảm ₫25k</span>
+    </div>
+    <div
+      class="options"
+      *ngIf="product.productstocks && product.productstocks.length > 0"
+    >
+      <div class="option-title">Kích Thước</div>
+      <div class="option-buttons">
+        <button
+          class="option-button"
+          *ngFor="let stock of product.productstocks"
+        >
+          {{ stock.namesize }} <span *ngIf="stock.namecolor">-{{ stock.namecolor }}</span>
+        </button>
       </div>
     </div>
-    <button class="add-to-cart">THÊM VÀO GIỎ HÀNG</button>
-    <button class="save-button">MUA NGAY</button>
-    <button class="social-share">CHIA SẺ</button>
-  </div>
-  <div class="guarantee">
-    <button>Cam kết chính hãng 100%</button>
-  </div>
-</div>
-<div class="container-all-product">
-<div class="product-same-kind">
-  <div class="product-list-header">SẢN PHẨM LIÊN QUAN</div>
-  <app-productlist
-    [productList]="productsKind"
-    [shouldWrap]="shouldWrap"
-  ></app-productlist>
-  <app-paging
-  [totalPages]="Math.ceil(total / pageSize)"
-  [currentPage]="pageIndex"
-  (pageChanged)="onPageChanged($event)"
-></app-paging>
-</div>
-<div class="product-list">
-  <div class="product-list-header">CÓ THỂ BẠN THÍCH</div>
-  <div class="product-item">
-    <img src="assets/images/Racker.jpg" alt="Sandals" class="product-image">
-    <div class="product-details">
-      <div class="product-name">Sandals leo núi đá ngoại nam NH100</div>
-      <div class="product-price">
-        545.000đ
-        <span class="original-price">800.000đ</span>
-      </div>
+    <div class="quantity">
+      <span>Số Lượng</span>
+      <button class="quantity-button">-</button>
+      <input type="text" value="1" class="quantity-input" />
+      <button class="quantity-button">+</button>
+      <span>158084 sản phẩm có sẵn</span>
+    </div>
+    <div class="action-buttons">
+      <button class="add-to-cart" (click)=" addCart()">Thêm Vào Giỏ Hàng</button>
+      <button class="buy-now">Mua Ngay</button>
     </div>
   </div>
-  <!-- Repeat the product-item div for each product -->
 </div>
+<div class="social-share-bar">
+  <div class="share-buttons">
+    <span>Chia sẻ:</span>
+    <button class="share-button">
+      <img src="/assets/images/messenger.png" alt="Messenger" />
+    </button>
+    <button class="share-button">
+      <img src="/assets/images/icFB.png" alt="Facebook" />
+    </button>
+    <button class="share-button">
+      <img src="/assets/images/instagram.png" alt="Pinterest" />
+    </button>
+  </div>
+  <div class="info-section">
+    <div class="info-item liked">
+      <img src="/api/placeholder/20/20" alt="Heart" />
+      <span>Đã thích (330)</span>
+    </div>
+    <div class="info-item guarantee">
+      <img src="/api/placeholder/20/20" alt="Shield" />
+      <span>Bảo Hành</span>
+    </div>
+    <div class="info-item return-policy">
+      <span>Trả hàng miễn phí 15 ngày</span>
+    </div>
+  </div>
 </div>
-</div>
+<div class="description"></div>
 <app-footer></app-footer>
+<app-notification *ngIf="hidenotify"  [message]="message"></app-notification>

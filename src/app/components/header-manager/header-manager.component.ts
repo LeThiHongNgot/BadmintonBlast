@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { ManagerCustomerComponent } from '../managerCustomer/manager-customer.component';
-import { ManagerProductComponent } from '../manager-product/manager-product.component';
+import { ManagerCustomerComponent } from '../../admin/managerCustomer/manager-customer.component';
+import { ManagerProductComponent } from '../../admin/manager-product/manager-product.component';
 import { NgIf } from '@angular/common';
-import { OrderComponent } from '../order/order.component';
+import { OrderComponent } from '../../admin/order/order.component';
 
 @Component({
   selector: 'app-header-manager',

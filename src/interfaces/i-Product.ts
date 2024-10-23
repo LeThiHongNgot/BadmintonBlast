@@ -10,12 +10,13 @@ export interface IProduct {
     price: number; 
     available: number; 
     deprice: number;
+    date:Date;
     image: Image[]; 
     productstocks: IProductStock[]; 
 }
 
 interface Image {
     idproduct: number;
-    image4?: string | null; 
+    image4?: File | null; 
     id: number;
   }

@@ -46,6 +46,10 @@ export class BillService {
     return this.http.post<IBill>(`${environment.apiUrl}Bills`, bills);
   }
 
+  GetBillIdCustomer(idcustomer:number):Observable<IBill[]> {
+    return this.http.get<IBill[]>(`${environment.apiUrl}Bills/customer/${idcustomer}`);
+  }
+
   getTotalBill(dateStart: string | null, dateEnd: string | null, status: number | null,keyword:string|null): Observable<number> {
     let params = new HttpParams();
 

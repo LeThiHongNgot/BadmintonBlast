@@ -1,64 +1,107 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { ICustomer } from '../../interfaces/i-Customers';
-import { ValidationService } from '../validation/validation.service';
-import { Observable } from 'rxjs';
-import { HttpClient , HttpParams,HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, map, catchError, of } from 'rxjs';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CustomersService {
   constructor( 
-    private http: HttpClient,
-    private validation:ValidationService,) { }
+    private http: HttpClient,  
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private jwtHelper: JwtHelperService) { }
+
+  userInfo = new BehaviorSubject(null);
+
+  getCustomers(pageIndex: number, pageSize: number, keyword?: string): Observable<ICustomer[]> {
+    let params = new HttpParams()
+      .set('PageIndex', pageIndex.toString())
+      .set('PageSize', pageSize.toString());
   
-    getCustomers(pageIndex: number, pageSize: number, keyword?: string): Observable<ICustomer[]> {
-      let params = new HttpParams()
-        .set('PageIndex', pageIndex.toString())
-        .set('PageSize', pageSize.toString());
-    
-      // Nếu keyword không trống, thêm tham số 'Keyword' vào URL
-      if (keyword && keyword.trim()) {
-        params = params.set('Keyword', keyword);
-      }
-    
-      return this.http.get<ICustomer[]>(`${environment.apiUrl}Customers/GetCustomers`, { params });
+    if (keyword && keyword.trim()) {
+      params = params.set('Keyword', keyword);
     }
+  
+    return this.http.get<ICustomer[]>(`${environment.apiUrl}Customers/GetCustomers`, { params });
+  }
 
-      getTotalCustomers(keyword?: string): Observable<number> {
-      let params = new HttpParams();
-      if (keyword) {
-        params = params.set('keyword', keyword);
-      }
-      return this.http.get<number>(`${environment.apiUrl}Customers/GetTotalCustomers`, { params });
+  getTotalCustomers(keyword?: string): Observable<number> {
+    let params = new HttpParams();
+    if (keyword) {
+      params = params.set('keyword', keyword);
     }
-    deleteCustomer(id: string): Observable<void> {
-      return this.http.delete<void>(`${environment.apiUrl}Customers/Delete/${id}`);
-    }
+    return this.http.get<number>(`${environment.apiUrl}Customers/GetTotalCustomers`, { params });
+  }
 
-    insertCustomer(formData: ICustomer): Observable<void> {
-      return this.http.post<void>(`${environment.apiUrl}/Customers/Create`, formData);
-    }
-    insertlogin(email: string, Password:string): Observable<void> {
-      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-      const body = { email: email,Password: Password };
-      return this.http.post<void>(`${environment.apiUrl}/Customers/login`,body);
-    }
-    updateCustomer(customer: ICustomer): Observable<ICustomer> {
-      return this.http.put<ICustomer>(`${environment.apiUrl}Customers/Update`, customer);
-    }
+  deleteCustomer(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}Customers/Delete/${id}`);
+  }
 
-    getCustomerId(customerId: number): Observable<ICustomer> {
-      return this.http.get<ICustomer>(`${environment.apiUrl}Customers/GetById/${customerId}`);
-    }
-    login(email: string, password: string) {
-      this.insertlogin(email, password).subscribe({
-        next: () => {
-          localStorage.setItem('isAuthenticated', 'true');
-        },
-        error: () => {
-          localStorage.removeItem('isAuthenticated');
+  insertCustomer(formData: ICustomer): Observable<void> {
+    return this.http.post<void>(`${environment.apiUrl}Customers/Insert`, formData);
+  }
+
+  insertlogin(email: string, password: string): Observable<string> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = { email, password };
+  
+    return this.http.post<{ token: string }>(`${environment.apiUrl}Customers/login`, body, { headers }).pipe(
+      map((res) => {
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.setItem('user-token', res.token);
         }
-      });
+        return 'Đăng nhập thành công';
+      }),
+      catchError((error) => {
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.removeItem('user-token');
+        }
+        console.error('Lỗi đăng nhập:', error);
+        return of('Đăng nhập thất bại');
+      })
+    );
+  }
+
+  removeToken(): void {
+    localStorage.removeItem('user-token');
+  }
+
+  updateCustomer(id: number, customer: FormData): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}Customers/Update/${id}`, customer);
+  }
+  
+
+  getCustomerId(customerId: number): Observable<ICustomer> {
+    return this.http.get<ICustomer>(`${environment.apiUrl}Customers/GetById/${customerId}`);
+  }
+
+  getClaimValue(): number | 0 {
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('user-token');
+      const claimName = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier';
+
+      if (token) {
+        try {
+          const decodedToken = this.jwtHelper.decodeToken(token);
+          const claimValue = decodedToken[claimName];
+  
+          return claimValue;
+        } catch (error) {
+          console.error('Error decoding token:', error);
+          return 0;
+        }
+      } else {
+        console.warn('Token not found.');
+        return 0;
+      }
+    } else {
+      console.warn('Not running in the browser environment.');
+      return 0;
     }
+  }
 }

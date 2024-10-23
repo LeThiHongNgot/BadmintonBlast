@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
 import { NgFor,NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { IProduct } from '../../../interfaces/i-Product';
-
+import { SharedService } from '../../../services/Share.service';
 @Component({
   selector: 'app-productlist',
   standalone: true,
@@ -32,7 +32,9 @@ export class ProductlistComponent {
     this.hasHalfStar = hasHalfStar; // Nửa sao nếu cần
     this.emptyStars = Array(emptyStarsCount).fill(0); // Số lượng sao trống
   }
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private shareService: SharedService, 
+  ) {}
 
   detailproduct(id: number, name: string) {
     if (id === undefined || id === null) {
@@ -45,33 +47,8 @@ export class ProductlistComponent {
       return; // Thoát khỏi hàm nếu tên không hợp lệ
     }
   
-    const formattedName = this.removeDiacritics(name);
-    
-    console.log('Navigating to: /chitietsanpham', id, encodeURIComponent(formattedName)); // Thông báo
-    this.router.navigate(['/chitietsanpham', id, encodeURIComponent(formattedName)]);
+    name= this.shareService.removeDiacritics(name);  
+    this.router.navigate(['/chitietsanpham', id, encodeURIComponent(name)]);
   }
-  
-  
-  // Hàm loại bỏ dấu
-  removeDiacritics(str: string): string {
-    if (!str) return ''; // Trả về chuỗi rỗng nếu str là undefined hoặc null
-  
-    const diacriticsMap: { [key: string]: string } = {
-      'á': 'a', 'à': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
-      'ắ': 'a', 'ằ': 'a', 'ẳ': 'a', 'ẵ': 'a', 'ặ': 'a',
-      'ấ': 'a', 'ầ': 'a', 'ẩ': 'a', 'ẫ': 'a', 'ậ': 'a',
-      'í': 'i', 'ì': 'i', 'ỉ': 'i', 'ĩ': 'i', 'ị': 'i',
-      'ó': 'o', 'ò': 'o', 'ỏ': 'o', 'õ': 'o', 'ọ': 'o',
-      'ố': 'o', 'ồ': 'o', 'ổ': 'o', 'ỗ': 'o', 'ộ': 'o',
-      'ú': 'u', 'ù': 'u', 'ủ': 'u', 'ũ': 'u', 'ụ': 'u',
-      'ý': 'y', 'ỳ': 'y', 'ỷ': 'y', 'ỹ': 'y', 'ỵ': 'y',
-      'đ': 'd',
-      // Thêm các ký tự khác nếu cần
-    };
-  
-    return str.replace(/[áàảãạắằẳẵặấầẩẫậíìỉĩịóòỏõọốồổỗộúùủũụýỳỷỹỵđ]/g, function (match) {
-      return diacriticsMap[match] || match;
-    }).replace(/\s+/g, '-').toLowerCase(); // Thay khoảng trắng bằng dấu gạch ngang
-  }
-  
+
 }

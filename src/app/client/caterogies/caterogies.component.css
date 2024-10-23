@@ -1,103 +1,139 @@
-.breadcrumb {
-  background-color: #f5f5f5; /* Màu nền của breadcrumb */
-  padding: 20px 25px; /* Đệm cho breadcrumb */
-  font-size: 14px; /* Kích thước chữ */
-}
-
-.breadcrumb ul {
-  list-style: none; /* Bỏ gạch chân cho danh sách */
-  display: flex; /* Sử dụng flexbox để căn giữa */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  margin: 0; /* Xóa margin */
-  padding: 0; /* Xóa padding */
-}
-
-.breadcrumb li {
-  margin: 0 5px; /* Khoảng cách giữa các mục */
-}
-
-.breadcrumb a {
-  text-decoration: none; /* Bỏ gạch chân */
-  color: #333; /* Màu chữ */
-}
-
-.breadcrumb span {
-  color: #aaa; /* Màu cho dấu phân cách */
-}
 .container {
-  display: flex; /* Sử dụng flexbox để tạo bố cục 3 cột */
-  border-top: 1px solid #767373;
+  position: relative;
+  top: 90px;
+  width: 100%;
+  display: flex;
+  z-index: 1;
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+.sidebar {
+  width: 200px;
+  padding-left: 20px;
+  font-size: 15px;
+}
+.filter-group {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000000c5;
+  padding-bottom: 30px;
+  width: 90%;
+}
+.filter-group button
+{
+  padding: 10px 15px;
+  border: none;
+  margin-top: 10px;
+  background-color:  #4d5cff;
+  color: #fffffffa;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+}
+.filter-group button:hover
+{
+  background-color:  #3e33dc;
+}
+.filter-group input[type="number"]
+{
+ outline: none;
+}
+.filter-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #000000d0;
+  padding-bottom: 5px;
+}
+.filter-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.filter-option img
+{
+  width: 20px;
+  height:20px;
+  margin-right: 5px;
+}
+.filter-option input[type="radio"] {
+  margin-right: 5px;
+}
+
+.main-content {
+  flex: 1;
+}
+.sort-options {
+  display: flex;
   margin-bottom: 20px;
 }
-
-.sidebar {
-  width: 200px; /* Chiều rộng của sidebar */
-  background-color: #f5f5f5; /* Màu nền của sidebar */
-  padding: 15px; /* Đệm cho sidebar */
-  border-right: 1px solid #b2abab;
+.sort-button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  background-color: white;
+  cursor: pointer;
 }
-
-.content {
-  flex: 1; /* Chiếm không gian còn lại */
-
-  justify-content: center;
+.sort-button.active {
+  background-color: #ff4d4f;
+  color: white;
 }
-.content .list-product {
-  margin-top: 20px;
-  width: 100%;
-  display: flex; 
-  justify-content: center;
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  margin-right: 15px;
 }
-
-.book-item {
-  border: 1px solid #ddd; /* Đường viền cho mỗi sách */
-  border-radius: 5px; /* Bo góc */
-  padding: 10px; /* Đệm cho mỗi sách */
-  margin-bottom: 20px; /* Khoảng cách giữa các mục sách */
-  text-align: center; /* Căn giữa văn bản */
+.product-card {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 2px;
+  overflow: hidden;
 }
-.product-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f5f5f5;
-  padding: 10px 20px;
+.product-card:hover {
+  transform: translateY(-2px); /* Nâng lên 10px */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Tăng shadow */
+  border: 1px solid #ff4d4d;
 }
-
-.product-nav ul {
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.product-image {
+  margin-left: 10px;
+  width: 90%;
+  height: 150px;
+  object-fit: cover;  
 }
-
-.product-nav li {
-  margin-right: 20px;
+.product-info {
+  padding: 10px;
 }
-
-.product-nav a {
-  text-decoration: none;
-  color: #333;
+.product-title {
+  font-size: 14px;
+  margin-bottom: 5px;
+  height: 50px;
+  overflow: hidden;
 }
-
-.product-nav .active a {
+.product-price {
+  font-size: 14px;
+  color: #ff4d4d;
   font-weight: bold;
 }
-
-.product-nav .icon {
-  color: orange;
+.product-discount {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 12px;
 }
-
-.product-nav .sale {
-  color: red;
-}
-
-.view-options {
+.product-rating {
   display: flex;
   align-items: center;
+  font-size: 12px;
+  color: #999;
 }
-
-.view-options button,
-.view-options select {
-  margin-left: 10px;
+.product-rating .star {
+  color: #ffc107;
+  margin-right: 2px;
+}
+.product-sold {
+  font-size: 12px;
+  color: #999;
+}
+.product-location {
+  font-size: 12px;
+  color: #999;
 }

@@ -1,33 +1,50 @@
-<div class="container">
-  <!-- Sidebar -->
+<div class="container-admin">
   <div class="sidebar">
-    <h3 class="sidebar-header">
-      <img src="assets/images/logo.png" alt="" />
-    </h3>
-
-    <div class="frame-icon" [ngStyle]="getIconStyle(0)" (click)="selectIcon(0)">
-      <span class="material-symbols-outlined" [ngStyle]="getIcon(0)"
-        >attach_money</span
-      >
+    <div class="sidebar-item logo-item">
+      <span class="sidebar-icon">
+        <img src="assets/images/logo.png" alt="Logo" />
+      </span>
+      <span class="sidebar-text">Badminton Blast</span>
     </div>
 
-    <div class="frame-icon" [ngStyle]="getIconStyle(1)" (click)="selectIcon(1)">
-      <span class="material-symbols-outlined" [ngStyle]="getIcon(1)"
-        >inventory</span
-      >
+    <div class="sidebar-item" [class.selected]="manager === 'thongke'" (click)="selectIcon('thongke')">
+      <span class="material-symbols-outlined sidebar-icon">home</span>
+      <span class="sidebar-text">THỐNG KÊ</span>
     </div>
 
-    <div class="frame-icon" [ngStyle]="getIconStyle(2)" (click)="selectIcon(2)">
-      <span class="material-symbols-outlined" [ngStyle]="getIcon(2)"
-        >orders</span
-      >
+    <!-- <div class="components-title">Components</div> -->
+
+    <div class="sidebar-item" [class.selected]="manager === 'sanpham'" (click)="selectIcon('sanpham')">
+      <span class="material-symbols-outlined sidebar-icon">inventory</span>
+      <span class="sidebar-text">SẢN PHẨM</span>
     </div>
 
-    <div class="frame-icon" [ngStyle]="getIconStyle(3)" (click)="selectIcon(3)">
-      <span class="material-symbols-outlined" [ngStyle]="getIcon(3)"
-        >person</span
-      >
+    <div class="sidebar-item" [class.selected]="manager === 'donhang'" (click)="selectIcon('donhang')">
+      <span class="material-symbols-outlined sidebar-icon">shopping_bag</span>
+      <span class="sidebar-text">ĐƠN HÀNG</span>
+    </div>
+
+    <div class="sidebar-item" [class.selected]="manager === 'khachhang'" (click)="selectIcon('khachhang')">
+      <span class="material-symbols-outlined sidebar-icon">perm_contact_calendar</span>
+      <span class="sidebar-text">KHÁCH HÀNG</span>
+    </div>
+
+    <div class="sidebar-item" [class.selected]="manager === 'datsan'" (click)="selectIcon('datsan')">
+      <span class="material-symbols-outlined sidebar-icon">quick_reorder</span>
+      <span class="sidebar-text">ĐẶT SÂN</span>
     </div>
   </div>
-  <app-header-manager [selectedIndex]="selectedIndex"></app-header-manager>
+
+  <div class="main-content">
+    <div class="header">
+      <app-header-manager></app-header-manager>
+    </div>
+
+    <div class="scrollable-content">
+      <app-manager-customer *ngIf="manager === 'khachhang'"></app-manager-customer>
+      <app-manager-product *ngIf="manager === 'sanpham'"></app-manager-product>
+      <app-add-product *ngIf="manager === 'themsanpham'"></app-add-product>
+      <app-order *ngIf="manager === 'donhang'"></app-order>
+    </div>
+  </div>
 </div>
